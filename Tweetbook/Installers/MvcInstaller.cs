@@ -78,7 +78,12 @@ namespace Tweetbook.Installers
                     return ApiKeyAuthenticationOptions.DefaultScheme;
                 };
             }).
-            AddApiKeySupport(options => { });
+            AddApiKeySupport(options => { })
+                .AddJwtBearer(x =>
+                {
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = tokenValidationParameters;
+                });
 
             services.AddAuthorization(options =>
             {
